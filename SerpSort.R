@@ -1,11 +1,15 @@
-#Create a data frame titled Serp
-v1 <- c(1, 2, 3, 1, 2, 3, 1, 2, 3)
-v2 <- c(1, 1, 1, 2, 2, 2, 3, 3, 3)
-serp <- data.frame(v1, v2)
-#Sort the data frame tited Serp on the first group, v1
-serp <- serp[order(v1),]
-#Method for serpentine is to multiply the variable you want to serpentine 
-#sort on by (-1) raised to the power of the first by group so v2*(-1)^v1
-serp$v3 <- serp$v2 * (-1)^serp$v1 
-#finally sort on v1 by v3 and the v2 variable will contain a serpentine sort
-FinalSerp <- serp[order(serp$v1, serp$v3),]
+#Create random data
+set.seed(1)
+Var1 <- sample(1:67, 1000, replace=T)
+Var2 <- sample(1:5, 1000, replace=T)
+Var3 <- sample(1:4, 1000, replace=T)
+FakeData <- data.frame(Var1, Var2, Var3)
+
+#Replace Var3==4 with missing data
+FakeData$Var3[FakeData$Var3 == 4] <- NA
+
+#Create a dummy variable for Var2 that is negative for every other by group of Var1
+FakeData$Dummy <- FakeData$Var2 * (-1)^(Var1 %% 2)
+
+#Sort the data frame on Var1 and Dummy variables
+FakeData <- FakeData[order(FakeData$Var1, FakeData$Dummy),]
