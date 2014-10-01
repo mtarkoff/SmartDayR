@@ -6,9 +6,9 @@ library(RCurl)
 #need
 download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.pem")
 curl <- getCurlHandle()
-curlSetOpt(.opts = list(proxy = 'https://proxy.pa.gov:8080'), curl = curl)
+curlSetOpt(.opts = list(proxy = 'https://xxx:8080'), curl = curl)
 
-url <- "https://api.instagram.com/v1/users/188084472/media/recent/?access_token=198648296.c5085a6.d1024e30041e4e128ee386124062768c&count=50"
+url <- "https://api.instagram.com/v1/users/xxx/media/recent/?access_token=xxx&count=50"
 
 feed1 <- fromJSON(getURL(url, curl = curl, cainfo="cacert.pem"),unexpected.escape="keep")$data
 pag1 <- fromJSON(getURL(url, curl = curl, cainfo="cacert.pem"),unexpected.escape="keep")$pagination
